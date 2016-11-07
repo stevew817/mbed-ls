@@ -73,6 +73,8 @@ class MbedLsToolsBase:
         self.lock_file = os.path.join(MbedLsToolsBase.HOME_DIR,
                                       MbedLsToolsBase.MBEDLS_HOME_DIR, MbedLsToolsBase.MBEDLS_GLOBAL_LOCK)
         self.mbedls_get_mocks()
+        # Make sure retargeting is applied if retarget file exists
+        self.retarget()
 
     # Which OSs are supported by this module
     # Note: more than one OS can be supported by mbed-lstools_* module
