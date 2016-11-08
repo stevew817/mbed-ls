@@ -170,8 +170,8 @@ def mbedls_main():
     mbeds.debug(__name__, "mbed-ls ver. " + get_mbedls_version())
     mbeds.debug(__name__, "host: " +  str((mbed_lstools_os_info())))
 
-    if not opts.skip_retarget:
-        mbeds.retarget()
+    if opts.skip_retarget:
+        mbeds.retarget(False)
 
     if opts.list_platforms:
         print mbeds.list_manufacture_ids()

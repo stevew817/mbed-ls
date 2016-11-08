@@ -74,7 +74,7 @@ class MbedLsToolsBase:
                                       MbedLsToolsBase.MBEDLS_HOME_DIR, MbedLsToolsBase.MBEDLS_GLOBAL_LOCK)
         self.mbedls_get_mocks()
         # Make sure retargeting is applied if retarget file exists
-        self.retarget()
+        self.retarget(True)
 
     # Which OSs are supported by this module
     # Note: more than one OS can be supported by mbed-lstools_* module
@@ -368,12 +368,17 @@ class MbedLsToolsBase:
                     str(e)))
         return {}
 
-    def retarget(self):
+    def retarget(self, enable=True):
         """! Enable retargeting
         @details Read data from local retarget configuration file
-        @return Retarget data structure read from configuration file
+        @param enable True  Try to read data from local retarget configuration file
+                      False Remove all retarget data read (disabling retarget functionality)
+        @return Retarget data structure read from configuration file, empty if disabled or no data found
         """
-        self.retarget_data = self.retarget_read()
+        if enable:
+            self.retarget_data = self.retarget_read()
+        else:
+            self.retarget_data = {}
         return self.retarget_data
 
     def mock_manufacture_ids(self, mid, platform_name, oper='+'):
